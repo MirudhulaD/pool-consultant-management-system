@@ -3,12 +3,13 @@ from bson.objectid import ObjectId
 from datetime import datetime, timedelta
 import random
 import sys
+import os
 
-MONGO_CONNECTION_STRING = "mongodb+srv://user:12345@cluster1.qjxgsoy.mongodb.net/"
+MONGO_URI = os.getenv("MONGO_URI")
 
 print("Connecting to MongoDB...")
 try:
-    client = pymongo.MongoClient(MONGO_CONNECTION_STRING, serverSelectionTimeoutMS=5000)
+    client = MongoClient(MONGO_URI)
     client.admin.command('ismaster')
     db = client.pool_management_system
     print("Connection successful.")
